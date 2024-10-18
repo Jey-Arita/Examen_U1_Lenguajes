@@ -44,7 +44,5 @@ namespace Examen_U1_Lenguajes.Database.Entities
 
         [ForeignKey(nameof(UsuarioId))]
         public virtual UsuarioEntity Usuario { get; set; }
-        public object CargoId { get; internal set; }
-        public object Cargo { get; internal set; }
     }
 }

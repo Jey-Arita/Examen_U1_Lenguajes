@@ -16,12 +16,6 @@ public class SolicitudPermisoConfiguration : IEntityTypeConfiguration<SolicitudP
         builder.Property(s => s.Estado).HasMaxLength(100);
         builder.Property(s => s.Observacion).HasMaxLength(250);
 
-        // Configurar relaciones
-        builder.HasOne(s => s.Cargo)
-            .WithMany() // Cambiar según tu necesidad
-            .HasForeignKey(s => s.CargoId)
-            .OnDelete(DeleteBehavior.Restrict);
-
         builder.HasOne(s => s.PermisoEntity)
             .WithMany() // Cambiar según tu necesidad
             .HasForeignKey(s => s.TipoPermisoId)

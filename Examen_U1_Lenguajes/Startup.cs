@@ -1,4 +1,5 @@
-﻿using Examen_U1_Lenguajes.Services;
+﻿using Examen_U1_Lenguajes.Database;
+using Examen_U1_Lenguajes.Services;
 using Examen_U1_Lenguajes.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -22,28 +23,16 @@ namespace Examen_U1_Lenguajes
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
-            //Se agrega tambien
             services.AddHttpContextAccessor();
 
-            var name = Configuration.GetConnectionString("DefaultConnection");
+            // Solo agregar DbContext una vez
+            services.AddDbContext<Contexto>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))); // Usa "DefaultConnection"
 
-            // Add DbContext
-            //services.AddDbContext<BlogUNAHContext>(options =>
-            //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
-            // Add custom services
-            //services.AddTransient<ICategoriesService, CategoriesSQLService>();
-            //services.AddTransient<IAuthService, AuthService>();
+            // Agregar servicios personalizados
             services.AddTransient<ISolicitudPermisoService, SolicitudPermisoServices>();
-            //services.AddTransient<IAuditService, AuditService>();
 
-            //Add Identity
-            //services.AddIdentity<IdentityUser, IdentityRole>(options =>
-            //{
-            //    options.SignIn.RequireConfirmedAccount = false;
-            //}).AddEntityFrameworkStores<BlogUNAHContext>()
-            //.AddDefaultTokenProviders();
-
+            // Configuración de autenticación
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -57,16 +46,13 @@ namespace Examen_U1_Lenguajes
                 {
                     ValidateIssuer = true,
                     ValidateAudience = false,
-                    ValidAudience = Configuration["JWT: ValidAudience"],
-                    ValidIssuer = Configuration["JWT: ValidIssuer"],
+                    ValidAudience = Configuration["JWT:ValidAudience"],
+                    ValidIssuer = Configuration["JWT:ValidIssuer"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Secret"]))
                 };
             });
 
-            // Add AutoMapper
-            //services.AddAutoMapper(typeof(AutoMapperProfile));
-
-            // CORS Configuration
+            // Configuración de CORS
             services.AddCors(opt =>
             {
                 var allowURLS = Configuration.GetSection("AllowURLS").Get<string[]>();
@@ -101,7 +87,6 @@ namespace Examen_U1_Lenguajes
             {
                 endpoints.MapControllers();
             });
-
         }
     }
 }
