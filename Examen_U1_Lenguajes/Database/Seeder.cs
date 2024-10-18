@@ -71,29 +71,13 @@ namespace Examen_U1_Lenguajes.Database
             }
         }
 
-        public static async Task LoadCargosAsync(ILoggerFactory loggerFactory, Contexto context)
-        {
-            try
-            {
-                var jsonFilePath = "SeedData/cargos.json";
-                var jsonContent = await File.ReadAllTextAsync(jsonFilePath);
-                var cargos = JsonConvert.DeserializeObject<List<CargoEntity>>(jsonContent);
-
-            }
-            catch (Exception e)
-            {
-                var logger = loggerFactory.CreateLogger<Seeder>();
-                logger.LogError(e, "Error al ejecutar el Seed de Cargos");
-            }
-        }
-
         public static async Task LoadTipoPermisoAsync(ILoggerFactory loggerFactory, Contexto context)
         {
             try
             {
                 var jsonFilePath = "SeedData/TipoPermiso.json";
                 var jsonContent = await File.ReadAllTextAsync(jsonFilePath);
-                var cargos = JsonConvert.DeserializeObject<List<CargoEntity>>(jsonContent);
+                var tipoPermisos = JsonConvert.DeserializeObject<List<TipoPermisoEntity>>(jsonContent);
 
             }
             catch (Exception e)

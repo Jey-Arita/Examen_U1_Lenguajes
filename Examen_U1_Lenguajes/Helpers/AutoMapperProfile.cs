@@ -13,7 +13,8 @@ namespace Examen_U1_Lenguajes.Helpers
         private void MapsForSolicitudPermiso()
         {
             CreateMap<SolicitudPermisoEntitty, SolicitudPermisoDto>();
-            CreateMap<SolicitudPermisoCreateDto, SolicitudPermisoEntitty>();
+            CreateMap<SolicitudPermisoCreateDto, SolicitudPermisoEntitty>().ForMember(dest => dest.Solicitud, opt => opt.Ignore()) // Lo generas tú
+            .ForMember(dest => dest.Estado, opt => opt.MapFrom(src => "Pendiente")); ;
             CreateMap<RechazarOAprobarSolicitudesEditDto, SolicitudPermisoEntitty>();
         }
     }

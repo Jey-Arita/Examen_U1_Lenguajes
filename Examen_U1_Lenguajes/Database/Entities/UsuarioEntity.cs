@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Examen_U1_Lenguajes.Database.Entities
 {
     [Table("usuarios", Schema = "dbo")]
-    public class UsuarioEntity
+    public class UsuarioEntity 
     {
         [Key]
         [Column("id_usuario")]

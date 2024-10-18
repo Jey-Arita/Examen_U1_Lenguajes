@@ -55,12 +55,12 @@ namespace Examen_U1_Lenguajes.Services
         }
         public async Task<ResponseDto<SolicitudPermisoDto>> CreateAsync(SolicitudPermisoCreateDto dto)
         {
-            var solicituEntitry = _autoMapper.Map<SolicitudPermisoEntitty>(dto);
-            _contexto.SolicitudesPermiso.Add(solicituEntitry);
+            var solicitudEntity = _autoMapper.Map<SolicitudPermisoEntitty>(dto);
+            _contexto.SolicitudesPermiso.Add(solicitudEntity);
             
             await _contexto.SaveChangesAsync();
            
-            var solicitudDto = _autoMapper.Map<SolicitudPermisoDto>(solicituEntitry);
+            var solicitudDto = _autoMapper.Map<SolicitudPermisoDto>(solicitudEntity);
             return new ResponseDto<SolicitudPermisoDto>
             {
                 StatusCode = 201,
