@@ -52,37 +52,6 @@ namespace Examen_U1_Lenguajes.Database
             modelBuilder.ApplyConfiguration(new SolicitudPermisoConfiguration());
             modelBuilder.ApplyConfiguration(new CargoConfiguration());
             modelBuilder.ApplyConfiguration(new TipoPermisoConfiguration());
-        }
-
-        // Método para agregar información de auditoría al guardar cambios
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
-        {
-            var entries = ChangeTracker
-                .Entries()
-                .Where(e => e.Entity is BaseEntity && (
-                    e.State == EntityState.Added ||
-                    e.State == EntityState.Modified));
-
-            foreach (var entry in entries)
-            {
-                var entity = entry.Entity as BaseEntity;
-                if (entity != null)
-                {
-                    if (entry.State == EntityState.Added)
-                    {
-                        entity.CreatedBy = _auditService.GetUserId(); // Registrar el usuario creador
-                        entity.CreatedDate = DateTime.Now;
-                    }
-                    else
-                    {
-                        entity.UpdatedBy = _auditService.GetUserId(); // Registrar el usuario actualizador
-                        entity.UpdatedDate = DateTime.Now;
-                    }
-                }
-            }
-
-            return base.SaveChangesAsync(cancellationToken);
-        }
+        }      
     }
-
 }
