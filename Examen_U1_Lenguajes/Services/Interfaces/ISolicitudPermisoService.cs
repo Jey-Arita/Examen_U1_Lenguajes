@@ -6,9 +6,9 @@ namespace Examen_U1_Lenguajes.Services.Interfaces
     public interface ISolicitudPermisoService
     {
         Task<ResponseDto<List<SolicitudPermisoDto>>> GetSolicitudPermisoListAsync();
-        Task<ResponseDto<CategoryDto>> GetPermisoServiceByIdAsync(Guid id);
-        Task<ResponseDto<CategoryDto>> CreateAsync(CategoryCreateDto dto);
-        Task<ResponseDto<CategoryDto>> EditAsync(CategoryEditDto dto, Guid id);
-        Task<ResponseDto<CategoryDto>> DeleteAsync(Guid id);
+        Task<ResponseDto<SolicitudPermisoDto>> GetPermisoServiceByIdAsync(Guid id);
+        Task<ResponseDto<SolicitudPermisoDto>> CreateAsync(SolicitudPermisoCreateDto dto);
+        Task<ResponseDto<SolicitudPermisoDto>> EditAsync(RechazarOAprobarSolicitudesEditDto dto, Guid id);
+        Task<ResponseDto<SolicitudPermisoDto>> DeleteAsync(Guid id);
     }
 }

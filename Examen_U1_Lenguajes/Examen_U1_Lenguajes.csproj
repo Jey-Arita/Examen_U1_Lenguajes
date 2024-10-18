@@ -25,7 +25,6 @@
 
   <ItemGroup>
     <Folder Include="Constants\" />
-    <Folder Include="Helpers\" />
     <Folder Include="SeedData\" />
   </ItemGroup>
 

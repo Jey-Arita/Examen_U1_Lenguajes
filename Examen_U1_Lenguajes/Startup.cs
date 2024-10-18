@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Examen_U1_Lenguajes.Services;
+using Examen_U1_Lenguajes.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -32,7 +34,7 @@ namespace Examen_U1_Lenguajes
             // Add custom services
             //services.AddTransient<ICategoriesService, CategoriesSQLService>();
             //services.AddTransient<IAuthService, AuthService>();
-            //services.AddTransient<IPostsService, PostsService>();
+            services.AddTransient<ISolicitudPermisoService, SolicitudPermisoServices>();
             //services.AddTransient<IAuditService, AuditService>();
 
             //Add Identity
