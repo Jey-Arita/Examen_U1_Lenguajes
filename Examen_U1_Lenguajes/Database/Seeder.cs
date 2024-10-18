@@ -1,6 +1,8 @@
 ﻿using Examen_U1_Lenguajes.Constants;
+using Examen_U1_Lenguajes.Database.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace Examen_U1_Lenguajes.Database
 {
@@ -49,14 +51,8 @@ namespace Examen_U1_Lenguajes.Database
 
                     var userEmpleado = new IdentityUser
                     {
-                        Email = "autor@blogunah.edu",
-                        UserName = "autor@blogunah.edu",
-                    };
-
-                    var normalUser = new IdentityUser
-                    {
-                        Email = "user@blogunah.edu",
-                        UserName = "user@blogunah.edu",
+                        Email = "empleado@blogunah.edu",
+                        UserName = "empleado@blogunah.edu",
                     };
 
                     await userManager.CreateAsync(userAdmin, "Temporal01*");
@@ -72,6 +68,38 @@ namespace Examen_U1_Lenguajes.Database
             {
                 var logger = loggerFactory.CreateLogger<Seeder>();
                 logger.LogError(e.Message);
+            }
+        }
+
+        public static async Task LoadCargosAsync(ILoggerFactory loggerFactory, Contexto context)
+        {
+            try
+            {
+                var jsonFilePath = "SeedData/cargos.json";
+                var jsonContent = await File.ReadAllTextAsync(jsonFilePath);
+                var cargos = JsonConvert.DeserializeObject<List<CargoEntity>>(jsonContent);
+
+            }
+            catch (Exception e)
+            {
+                var logger = loggerFactory.CreateLogger<Seeder>();
+                logger.LogError(e, "Error al ejecutar el Seed de Cargos");
+            }
+        }
+
+        public static async Task LoadTipoPermisoAsync(ILoggerFactory loggerFactory, Contexto context)
+        {
+            try
+            {
+                var jsonFilePath = "SeedData/TipoPermiso.json";
+                var jsonContent = await File.ReadAllTextAsync(jsonFilePath);
+                var cargos = JsonConvert.DeserializeObject<List<CargoEntity>>(jsonContent);
+
+            }
+            catch (Exception e)
+            {
+                var logger = loggerFactory.CreateLogger<Seeder>();
+                logger.LogError(e, "Error al ejecutar el Seed de Tipo de Permiso");
             }
         }
     }
