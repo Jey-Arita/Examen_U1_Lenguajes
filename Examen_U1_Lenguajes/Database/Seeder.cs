@@ -47,7 +47,7 @@ namespace Examen_U1_Lenguajes.Database
                         UserName = "admin@blogunah.edu",
                     };
 
-                    var userAutor = new IdentityUser
+                    var userEmpleado = new IdentityUser
                     {
                         Email = "autor@blogunah.edu",
                         UserName = "autor@blogunah.edu",
@@ -60,11 +60,11 @@ namespace Examen_U1_Lenguajes.Database
                     };
 
                     await userManager.CreateAsync(userAdmin, "Temporal01*");
-                    await userManager.CreateAsync(userAutor, "Temporal01*");
-                    await userManager.CreateAsync(normalUser, "Temporal01*");
+                    await userManager.CreateAsync(userEmpleado, "Temporal01*");
+              
 
                     await userManager.AddToRoleAsync(userAdmin, RolesConstant.ADMIN);
-                    await userManager.AddToRoleAsync(userAutor, RolesConstant.EMPLEADO);
+                    await userManager.AddToRoleAsync(userEmpleado, RolesConstant.EMPLEADO);
                 }
 
             }

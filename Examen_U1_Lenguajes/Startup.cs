@@ -36,6 +36,10 @@ namespace Examen_U1_Lenguajes
             services.AddTransient<ISolicitudPermisoService, SolicitudPermisoServices>();
             services.AddTransient<IAuthService, AuthService>();
             // ... otros servicios
+            services.AddIdentity<IdentityUser, IdentityRole>()
+            .AddEntityFrameworkStores<Contexto>()
+            .AddDefaultTokenProviders();
+
 
             // Agregar servicios personalizados
             services.AddTransient<ISolicitudPermisoService, SolicitudPermisoServices>();
