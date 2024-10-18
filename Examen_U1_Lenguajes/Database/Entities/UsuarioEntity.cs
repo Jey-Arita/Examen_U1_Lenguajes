@@ -9,7 +9,7 @@ namespace Examen_U1_Lenguajes.Database.Entities
     {
         [Key]
         [Column("id_usuario")]
-        public Guid Id_usuario { get; set; }
+        public Guid Id { get; set; }
 
         [Display(Name = "Nombre")]
         [Required(ErrorMessage = "El {0} del empleado es requerido.")]
@@ -37,5 +37,11 @@ namespace Examen_U1_Lenguajes.Database.Entities
         [Column("password")]
         public string Password { get; set; }
 
-    }
+        [Column("id_cargo")]
+        public Guid CargoId { get; set; }
+
+        [ForeignKey(nameof(CargoId))]
+        public virtual CargoEntity Cargo { get; set; }
+
+    } 
 }
