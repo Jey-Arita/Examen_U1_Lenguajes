@@ -38,7 +38,7 @@ namespace Examen_U1_Lenguajes.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cargos", "security");
+                    b.ToTable("cargo", "dbo");
                 });
 
             modelBuilder.Entity("Examen_U1_Lenguajes.Database.Entities.SolicitudPermisoEntitty", b =>
@@ -86,7 +86,7 @@ namespace Examen_U1_Lenguajes.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("SolicitudesPermiso", "security");
+                    b.ToTable("solicitud_permiso", "dbo");
                 });
 
             modelBuilder.Entity("Examen_U1_Lenguajes.Database.Entities.TipoPermisoEntity", b =>
@@ -103,7 +103,7 @@ namespace Examen_U1_Lenguajes.Migrations
 
                     b.HasKey("IdPermiso");
 
-                    b.ToTable("TiposPermiso", "security");
+                    b.ToTable("TipoPermisoEntities", "security");
                 });
 
             modelBuilder.Entity("Examen_U1_Lenguajes.Database.Entities.UsuarioEntity", b =>
@@ -148,7 +148,7 @@ namespace Examen_U1_Lenguajes.Migrations
 
                     b.HasIndex("CargoId");
 
-                    b.ToTable("Empleados", "security");
+                    b.ToTable("usuarios", "dbo");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

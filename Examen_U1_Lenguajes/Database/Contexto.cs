@@ -30,12 +30,6 @@ namespace Examen_U1_Lenguajes.Database
             modelBuilder.Entity<IdentityUserLogin<string>>().ToTable("users_logins");
             modelBuilder.Entity<IdentityUserToken<string>>().ToTable("users_tokens");
 
-            // Configurar nombres de las tablas para las entidades de la aplicación
-            modelBuilder.Entity<UsuarioEntity>().ToTable("Empleados");
-            modelBuilder.Entity<SolicitudPermisoEntitty>().ToTable("SolicitudesPermiso");
-            modelBuilder.Entity<CargoEntity>().ToTable("Cargos");
-            modelBuilder.Entity<TipoPermisoEntity>().ToTable("TiposPermiso");
-
             // Configurar las relaciones con DeleteBehavior.Restrict para evitar eliminaciones en cascada no deseadas
             var entityTypes = modelBuilder.Model.GetEntityTypes();
             foreach (var type in entityTypes)

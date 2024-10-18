@@ -12,11 +12,14 @@ namespace Examen_U1_Lenguajes.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
+                name: "dbo");
+
+            migrationBuilder.EnsureSchema(
                 name: "security");
 
             migrationBuilder.CreateTable(
-                name: "Cargos",
-                schema: "security",
+                name: "cargo",
+                schema: "dbo",
                 columns: table => new
                 {
                     id_cargo = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -24,7 +27,7 @@ namespace Examen_U1_Lenguajes.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cargos", x => x.id_cargo);
+                    table.PrimaryKey("PK_cargo", x => x.id_cargo);
                 });
 
             migrationBuilder.CreateTable(
@@ -43,7 +46,7 @@ namespace Examen_U1_Lenguajes.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TiposPermiso",
+                name: "TipoPermisoEntities",
                 schema: "security",
                 columns: table => new
                 {
@@ -52,7 +55,7 @@ namespace Examen_U1_Lenguajes.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TiposPermiso", x => x.id_permiso);
+                    table.PrimaryKey("PK_TipoPermisoEntities", x => x.id_permiso);
                 });
 
             migrationBuilder.CreateTable(
@@ -82,8 +85,8 @@ namespace Examen_U1_Lenguajes.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Empleados",
-                schema: "security",
+                name: "usuarios",
+                schema: "dbo",
                 columns: table => new
                 {
                     id_usuario = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -96,12 +99,12 @@ namespace Examen_U1_Lenguajes.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Empleados", x => x.id_usuario);
+                    table.PrimaryKey("PK_usuarios", x => x.id_usuario);
                     table.ForeignKey(
-                        name: "FK_Empleados_Cargos_id_cargo",
+                        name: "FK_usuarios_cargo_id_cargo",
                         column: x => x.id_cargo,
-                        principalSchema: "security",
-                        principalTable: "Cargos",
+                        principalSchema: "dbo",
+                        principalTable: "cargo",
                         principalColumn: "id_cargo",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -224,8 +227,8 @@ namespace Examen_U1_Lenguajes.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SolicitudesPermiso",
-                schema: "security",
+                name: "solicitud_permiso",
+                schema: "dbo",
                 columns: table => new
                 {
                     id_solicitud = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -239,28 +242,22 @@ namespace Examen_U1_Lenguajes.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SolicitudesPermiso", x => x.id_solicitud);
+                    table.PrimaryKey("PK_solicitud_permiso", x => x.id_solicitud);
                     table.ForeignKey(
-                        name: "FK_SolicitudesPermiso_Empleados_usuario_id",
-                        column: x => x.usuario_id,
-                        principalSchema: "security",
-                        principalTable: "Empleados",
-                        principalColumn: "id_usuario",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_SolicitudesPermiso_TiposPermiso_tipo_permiso",
+                        name: "FK_solicitud_permiso_TipoPermisoEntities_tipo_permiso",
                         column: x => x.tipo_permiso,
                         principalSchema: "security",
-                        principalTable: "TiposPermiso",
+                        principalTable: "TipoPermisoEntities",
                         principalColumn: "id_permiso",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_solicitud_permiso_usuarios_usuario_id",
+                        column: x => x.usuario_id,
+                        principalSchema: "dbo",
+                        principalTable: "usuarios",
+                        principalColumn: "id_usuario",
+                        onDelete: ReferentialAction.Restrict);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Empleados_id_cargo",
-                schema: "security",
-                table: "Empleados",
-                column: "id_cargo");
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
@@ -277,15 +274,15 @@ namespace Examen_U1_Lenguajes.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SolicitudesPermiso_tipo_permiso",
-                schema: "security",
-                table: "SolicitudesPermiso",
+                name: "IX_solicitud_permiso_tipo_permiso",
+                schema: "dbo",
+                table: "solicitud_permiso",
                 column: "tipo_permiso");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SolicitudesPermiso_usuario_id",
-                schema: "security",
-                table: "SolicitudesPermiso",
+                name: "IX_solicitud_permiso_usuario_id",
+                schema: "dbo",
+                table: "solicitud_permiso",
                 column: "usuario_id");
 
             migrationBuilder.CreateIndex(
@@ -319,6 +316,12 @@ namespace Examen_U1_Lenguajes.Migrations
                 schema: "security",
                 table: "users_roles",
                 column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_usuarios_id_cargo",
+                schema: "dbo",
+                table: "usuarios",
+                column: "id_cargo");
         }
 
         /// <inheritdoc />
@@ -329,8 +332,8 @@ namespace Examen_U1_Lenguajes.Migrations
                 schema: "security");
 
             migrationBuilder.DropTable(
-                name: "SolicitudesPermiso",
-                schema: "security");
+                name: "solicitud_permiso",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
                 name: "users_claims",
@@ -349,12 +352,12 @@ namespace Examen_U1_Lenguajes.Migrations
                 schema: "security");
 
             migrationBuilder.DropTable(
-                name: "Empleados",
+                name: "TipoPermisoEntities",
                 schema: "security");
 
             migrationBuilder.DropTable(
-                name: "TiposPermiso",
-                schema: "security");
+                name: "usuarios",
+                schema: "dbo");
 
             migrationBuilder.DropTable(
                 name: "roles",
@@ -365,8 +368,8 @@ namespace Examen_U1_Lenguajes.Migrations
                 schema: "security");
 
             migrationBuilder.DropTable(
-                name: "Cargos",
-                schema: "security");
+                name: "cargo",
+                schema: "dbo");
         }
     }
 }
