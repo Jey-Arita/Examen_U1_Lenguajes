@@ -30,7 +30,6 @@ namespace Examen_U1_Lenguajes.Database.Entities
         [Column("motivo")]
         public string Motivo { get; set; }
 
-        [Display(Name ="Estado")]
         [Column("estado")]
         public bool Estado { get; set; }
 
