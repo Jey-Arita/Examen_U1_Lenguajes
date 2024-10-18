@@ -29,7 +29,5 @@ namespace Examen_U1_Lenguajes.Controllers
             });
         }
 
-        [HttpGet]
-        public async Task<>
     }
 }

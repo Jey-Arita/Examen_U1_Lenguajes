@@ -52,6 +52,7 @@ namespace Examen_U1_Lenguajes.Database
             modelBuilder.ApplyConfiguration(new SolicitudPermisoConfiguration());
             modelBuilder.ApplyConfiguration(new CargoConfiguration());
             modelBuilder.ApplyConfiguration(new TipoPermisoConfiguration());
-        }      
+        }
+        
     }
 }

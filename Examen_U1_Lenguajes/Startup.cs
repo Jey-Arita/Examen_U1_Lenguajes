@@ -27,7 +27,14 @@ namespace Examen_U1_Lenguajes
 
             // Solo agregar DbContext una vez
             services.AddDbContext<Contexto>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))); // Usa "DefaultConnection"
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            // Configuración de AutoMapper
+            services.AddAutoMapper(typeof(Startup)); // O especifica el perfil de AutoMapper
+
+            // Otras configuraciones de servicios
+            services.AddTransient<ISolicitudPermisoService, SolicitudPermisoServices>();
+            // ... otros servicios
 
             // Agregar servicios personalizados
             services.AddTransient<ISolicitudPermisoService, SolicitudPermisoServices>();
