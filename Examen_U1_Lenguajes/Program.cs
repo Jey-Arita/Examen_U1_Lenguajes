@@ -1,4 +1,5 @@
 using Examen_U1_Lenguajes;
+using Examen_U1_Lenguajes.Database;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 
@@ -17,18 +18,18 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     var loggerFactory = services.GetRequiredService<ILoggerFactory>();
 
-    //try
-    //{
-    //    var context = services.GetRequiredService<BlogUNAHContext>();
-    //    var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
-    //    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-    //    await BlogUNAHSeeder.LoadDataAsync(context, loggerFactory, userManager, roleManager);
-    //}
-    //catch (Exception e)
-    //{
-    //    var logger = loggerFactory.CreateLogger<Program>();
-    //    logger.LogError(e, "Error al ejecutar el Seed de datos");
-    //}
+    try
+    {
+        var context = services.GetRequiredService<Contexto>();
+        var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+        var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+        await Seeder.LoadDataAsync(context, loggerFactory, userManager, roleManager);
+    }
+    catch (Exception e)
+    {
+        var logger = loggerFactory.CreateLogger<Program>();
+        logger.LogError(e, "Error al ejecutar el Seed de datos");
+    }
 
 }
 

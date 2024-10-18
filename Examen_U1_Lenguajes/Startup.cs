@@ -34,6 +34,7 @@ namespace Examen_U1_Lenguajes
 
             // Otras configuraciones de servicios
             services.AddTransient<ISolicitudPermisoService, SolicitudPermisoServices>();
+            services.AddTransient<IAuthService, AuthService>();
             // ... otros servicios
 
             // Agregar servicios personalizados
