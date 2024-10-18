@@ -1,0 +1,20 @@
+meta {
+  name: Create solicitud
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{PATH}}api/solicitud
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "tipoPermisoId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "fechainicio": "2024-10-18T09:00:48.239Z",
+    "fechafin": "2024-10-18T09:00:48.239Z",
+    "motivo": "string"
+  }
+}

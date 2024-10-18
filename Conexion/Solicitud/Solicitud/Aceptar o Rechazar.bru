@@ -1,0 +1,18 @@
+meta {
+  name: Aceptar o Rechazar
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{PATH}}api/solicitud/
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "estado": "string",
+    "observacion": "string"
+  }
+}
