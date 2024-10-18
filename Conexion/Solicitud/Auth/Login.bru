@@ -5,7 +5,14 @@ meta {
 }
 
 post {
-  url: 
-  body: none
+  url: {{PATH}}api/auth/login
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "email": "autor@blogunah.edu",
+    "password": "Temporal01*"
+  }
 }

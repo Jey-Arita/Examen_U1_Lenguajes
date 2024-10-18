@@ -7,14 +7,18 @@ meta {
 post {
   url: {{PATH}}api/solicitud
   body: json
-  auth: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{TOKEN}}
 }
 
 body:json {
   {
     "tipoPermisoId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
     "fechainicio": "2024-10-18T09:00:48.239Z",
-    "fechafin": "2024-10-18T09:00:48.239Z",
-    "motivo": "string"
+    "fechafin": "2024-10-209:00:48.239Z",
+    "motivo": "Me dormi y no hice el video"
   }
 }

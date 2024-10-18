@@ -7,7 +7,11 @@ meta {
 put {
   url: {{PATH}}api/solicitud/
   body: json
-  auth: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{TOKEN}}
 }
 
 body:json {
