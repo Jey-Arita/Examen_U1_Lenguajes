@@ -10,7 +10,7 @@ namespace Examen_U1_Lenguajes.Database.Entities
         [Column("id_solicitud")]
         public Guid Solicitud { get; set; }
 
-        [Column("cargo_id")]
+        [Column("tipo_permiso")]
         public Guid TipoPermisoId { get; set; }
 
         [ForeignKey(nameof(TipoPermisoId))]
@@ -44,5 +44,7 @@ namespace Examen_U1_Lenguajes.Database.Entities
 
         [ForeignKey(nameof(UsuarioId))]
         public virtual UsuarioEntity Usuario { get; set; }
+        public object CargoId { get; internal set; }
+        public object Cargo { get; internal set; }
     }
 }

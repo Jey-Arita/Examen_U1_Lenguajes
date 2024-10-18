@@ -9,7 +9,7 @@ namespace Examen_U1_Lenguajes.Database.Entities
         [Column("id_permiso")]
         public Guid IdPermiso { get; set; }
 
-        [Display(Name = "Cargo")]
+        [Display(Name = "permiso")]
         [StringLength(200)]
         [Column("tipo_permiso")]
         public string TipoPermiso { get; set; }
