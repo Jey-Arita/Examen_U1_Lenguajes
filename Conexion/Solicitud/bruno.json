@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "Solicitud",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
