@@ -7,11 +7,11 @@ namespace Examen_U1_Lenguajes.Database
     public class Seeder
     {
         public static async Task LoadDataAsync(
-          Contexto context,
-          ILoggerFactory loggerFactory,
-          UserManager<IdentityUser> userManager,
-          RoleManager<IdentityRole> roleManager
-          )
+            Contexto context,
+            ILoggerFactory loggerFactory,
+            UserManager<IdentityUser> userManager,
+            RoleManager<IdentityRole> roleManager
+            )
         {
             try
             {
@@ -35,8 +35,8 @@ namespace Examen_U1_Lenguajes.Database
                 if (!await roleManager.Roles.AnyAsync())
                 {
                     //Evitamos tener los string quemados
-                    await roleManager.CreateAsync(new IdentityRole(RolesContant.ADMIN));
-                    await roleManager.CreateAsync(new IdentityRole(RolesContant.EMPLEADO));
+                    await roleManager.CreateAsync(new IdentityRole(RolesConstant.ADMIN));
+                    await roleManager.CreateAsync(new IdentityRole(RolesConstant.EMPLEADO));
                 }
 
                 if (!await userManager.Users.AnyAsync())
@@ -47,28 +47,32 @@ namespace Examen_U1_Lenguajes.Database
                         UserName = "admin@blogunah.edu",
                     };
 
-                    var userEmpleado = new IdentityUser
+                    var userAutor = new IdentityUser
                     {
-                        Email = "empleado@blogunah.edu",
-                        UserName = "empleado@blogunah.edu",
+                        Email = "autor@blogunah.edu",
+                        UserName = "autor@blogunah.edu",
                     };
 
-      
+                    var normalUser = new IdentityUser
+                    {
+                        Email = "user@blogunah.edu",
+                        UserName = "user@blogunah.edu",
+                    };
 
                     await userManager.CreateAsync(userAdmin, "Temporal01*");
-                    await userManager.CreateAsync(userEmpleado, "Temporal01*");
+                    await userManager.CreateAsync(userAutor, "Temporal01*");
+                    await userManager.CreateAsync(normalUser, "Temporal01*");
 
-                    await userManager.AddToRoleAsync(userAdmin, RolesContant.ADMIN);
-                    await userManager.AddToRoleAsync(userEmpleado, RolesContant.EMPLEADO);
+                    await userManager.AddToRoleAsync(userAdmin, RolesConstant.ADMIN);
+                    await userManager.AddToRoleAsync(userAutor, RolesConstant.EMPLEADO);
                 }
 
             }
             catch (Exception e)
             {
-                var logger = loggerFactory.CreateLogger<Contexto>();
+                var logger = loggerFactory.CreateLogger<Seeder>();
                 logger.LogError(e.Message);
             }
         }
-
     }
 }
