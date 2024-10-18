@@ -1,25 +1,35 @@
+using Examen_U1_Lenguajes;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+var startup = new Startup(builder.Configuration);
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+startup.ConfigureServices(builder.Services);
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+startup.Configure(app, app.Environment);
+
+using (var scope = app.Services.CreateScope())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    var services = scope.ServiceProvider;
+    var loggerFactory = services.GetRequiredService<ILoggerFactory>();
+
+    //try
+    //{
+    //    var context = services.GetRequiredService<BlogUNAHContext>();
+    //    var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+    //    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+    //    await BlogUNAHSeeder.LoadDataAsync(context, loggerFactory, userManager, roleManager);
+    //}
+    //catch (Exception e)
+    //{
+    //    var logger = loggerFactory.CreateLogger<Program>();
+    //    logger.LogError(e, "Error al ejecutar el Seed de datos");
+    //}
+
 }
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
 
 app.Run();
