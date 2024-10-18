@@ -11,10 +11,10 @@ namespace Examen_U1_Lenguajes.Database.Entities
         public Guid Solicitud { get; set; }
 
         [Column("cargo_id")]
-        public Guid CargoId { get; set; }
+        public Guid TipoPermisoId { get; set; }
 
-        [ForeignKey(nameof(CargoId))]
-        public virtual CargoEntity Cargo { get; set; }
+        [ForeignKey(nameof(TipoPermisoId))]
+        public virtual TipoPermisoEntity PermisoEntity { get; set; }
 
         [Display(Name = "Fecha_inicio")]
         [Column("fecha_inicio")]
@@ -32,13 +32,13 @@ namespace Examen_U1_Lenguajes.Database.Entities
 
         [Display(Name ="Estado")]
         [Column("estado")]
-        public bool Estado { get; set; }
+        public string Estado { get; set; }
 
         [Display(Name = "Observacion")]
         [MinLength(10, ErrorMessage = "La {0} debe tener al menos {1} caracteres.")]
         [StringLength(250)]
         [Column("observacion")]
-        public string Observcion { get; set; }
+        public string Observacion { get; set; }
         
         [Column("usuario_id")]
         public Guid UsuarioId { get; set; }
